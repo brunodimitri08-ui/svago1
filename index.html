@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domanda importante 💅</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="rebecca.css">
+</head>
+<body>
+
+  <!-- Cuori di sfondo -->
+  <div class="hearts" id="hearts"></div>
+
+  <div id="arena">
+    <div class="card">
+      <img src="domanda.png" class="emoji-top">
+      <h1>Rebecca, ci sei il 29 luglio a vedere Spiderman al cinema io e te?</h1>
+
+      <div id="buttons">
+        <button id="btn-si" onclick="rispostaSi()">Sì 😇</button>
+        <button id="btn-no" onclick="scappaNo()">No 🙅‍♀️</button>
+      </div>
+
+      <div id="messaggio">
+        <span class="confetti-strip">🕸️🕷️🕸️</span>
+        <span class="msg-emoji">🕷️</span>
+        <p class="msg-text">Perfetto, sapevo avresti detto di si,<br>ti aspetto :)</p>
+        <span class="confetti-strip">🕸️🕷️🕸️</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const arena = document.getElementById('arena');
+    let floatingNo = null;
+    let escaped = false;
+
+    // Genera cuori galleggianti di sfondo
+    const heartsContainer = document.getElementById('hearts');
+    const spideyImgs = ['spidey1.png', 'spidey2.png', 'spidey3.png'];
+    for (let i = 0; i < 12; i++) {
+      const h = document.createElement('img');
+      h.className = 'heart';
+      h.src = spideyImgs[Math.floor(Math.random() * spideyImgs.length)];
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.animationDuration = (6 + Math.random() * 8) + 's';
+      h.style.animationDelay    = (Math.random() * 8) + 's';
+      const size = (50 + Math.random() * 60) + 'px';
+      h.style.width = size;
+      heartsContainer.appendChild(h);
+    }
+
+    function scappaNo() {
+      if (!escaped) {
+        const original  = document.getElementById('btn-no');
+        const btnRect   = original.getBoundingClientRect();
+        const arenaRect = arena.getBoundingClientRect();
+
+        // Crea un clone nell'arena, la card non viene toccata
+        floatingNo = original.cloneNode(true);
+        floatingNo.id = 'btn-no-floating';
+        floatingNo.style.position = 'absolute';
+        floatingNo.style.left = (btnRect.left - arenaRect.left) + 'px';
+        floatingNo.style.top  = (btnRect.top  - arenaRect.top)  + 'px';
+        floatingNo.addEventListener('click', scappaNo);
+        arena.appendChild(floatingNo);
+
+        // Nasconde l'originale senza modificare il layout
+        original.style.visibility = 'hidden';
+        escaped = true;
+      }
+
+      const pad  = 8;
+      const maxX = arena.clientWidth  - floatingNo.offsetWidth  - pad;
+      const maxY = arena.clientHeight - floatingNo.offsetHeight - pad;
+      const x = Math.random() * (maxX - pad) + pad;
+      const y = Math.random() * (maxY - pad) + pad;
+      floatingNo.style.left = x + 'px';
+      floatingNo.style.top  = y + 'px';
+    }
+
+    function rispostaSi() {
+      document.getElementById('buttons').style.visibility = 'hidden';
+      if (floatingNo) floatingNo.style.visibility = 'hidden';
+      document.getElementById('btn-no').style.visibility = 'hidden';
+      document.getElementById('messaggio').classList.add('visible');
+    }
+  </script>
+
+</body>
+</html>

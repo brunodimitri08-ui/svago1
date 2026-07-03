@@ -1,0 +1,198 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0,0,0,0.80), rgba(0,0,0,0.80)), url('sfondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Simboli galleggianti di sfondo */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.heart {
+  position: absolute;
+  bottom: -80px;
+  opacity: 0;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 0 14px rgba(255, 40, 40, 0.85));
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg);      opacity: 0.7; }
+  100% { transform: translateY(-110vh) rotate(30deg); opacity: 0;   }
+}
+
+/* Riquadro invisibile leggermente più grande della card */
+#arena {
+  position: relative;
+  padding: 160px;
+  border-radius: 48px;
+  z-index: 1;
+}
+
+/* Card centrale */
+.card {
+  position: relative;
+  background: rgba(30, 0, 0, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: none;
+  border-radius: 32px;
+  padding: 3rem 3.5rem;
+  text-align: center;
+  box-shadow:
+    0 8px 40px rgba(160, 0, 0, 0.35),
+    0 0 0 1px rgba(100, 0, 0, 0.2),
+    0 2px 8px rgba(0,0,0,0.5);
+  max-width: 520px;
+  width: 90%;
+  animation: cardIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* Mobile (iPhone e schermi piccoli) */
+@media (max-width: 600px) {
+  #arena {
+    padding: 70px;
+  }
+
+  .card {
+    padding: 2rem 1.8rem;
+    border-radius: 24px;
+    width: 85vw;
+  }
+
+  .emoji-top {
+    font-size: 2.6rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    padding: 0.75rem 1.8rem;
+    font-size: 1rem;
+  }
+
+  .msg-text {
+    font-size: 1.2rem;
+  }
+
+  .msg-emoji {
+    font-size: 2.2rem;
+  }
+
+  .confetti-strip {
+    font-size: 1.4rem;
+  }
+}
+@keyframes cardIn {
+  from { transform: scale(0.7) translateY(40px); opacity: 0; }
+  to   { transform: scale(1)   translateY(0);    opacity: 1; }
+}
+
+.emoji-top {
+  width: 90px;
+  margin: 0 auto 0.5rem;
+  display: block;
+  animation: wiggle 2s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%,100% { transform: rotate(-5deg); }
+  50%     { transform: rotate(5deg);  }
+}
+
+h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 2.1rem;
+  color: #ff2222;
+  text-shadow: 0 0 18px rgba(255,30,30,0.5), 0 2px 8px rgba(0,0,0,0.6);
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+
+#buttons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+button {
+  padding: 0.8rem 2.4rem;
+  font-size: 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#btn-si {
+  background: linear-gradient(135deg, #cc0000, #ff2222);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(200,0,0,0.45);
+}
+#btn-si:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(200,0,0,0.6);
+}
+#btn-si:active { transform: scale(0.97); }
+
+#btn-no, #btn-no-floating {
+  background: linear-gradient(135deg, #7a0000, #aa0000);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(120,0,0,0.5);
+}
+#btn-no:hover, #btn-no-floating:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(120,0,0,0.65);
+}
+#btn-no:active, #btn-no-floating:active { transform: scale(0.97); }
+
+/* Messaggio finale */
+#messaggio {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+#messaggio.visible {
+  display: flex;
+  animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.msg-emoji { font-size: 3rem; }
+
+.msg-text {
+  font-family: 'Bangers', cursive;
+  font-size: 1.55rem;
+  color: #ff4444;
+  text-shadow: 0 0 12px rgba(255,50,50,0.4);
+  line-height: 1.4;
+}
+
+.confetti-strip {
+  font-size: 1.8rem;
+  letter-spacing: 0.3rem;
+}
