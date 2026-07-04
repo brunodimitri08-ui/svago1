@@ -3,30 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Domanda importante 💅</title>
+  <title>Domanda importante</title>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="rebecca.css">
+  <link rel="stylesheet" href="ester.css">
 </head>
 <body>
 
   <!-- Cuori di sfondo -->
   <div class="hearts" id="hearts"></div>
 
-  <div id="arena">
+  <!-- Busta -->
+  <div id="envelope-wrap">
+    <div id="envelope">
+      <div id="env-flap"></div>
+      <div id="env-body"></div>
+    </div>
+    <button id="btn-apri" onclick="apriLettera()">Apri</button>
+  </div>
+
+  <!-- Card con domanda (nascosta inizialmente) -->
+  <div id="arena" class="hidden">
     <div class="card">
-      <img src="domanda.png" class="emoji-top">
-      <h1>Rebecca, ci sei il 29 luglio a vedere Spiderman al cinema io e te?</h1>
+      <!-- Contenuto -->
+      <div class="card-content">
+        <img src="domanda.png" class="emoji-top">
+        <h1>ester, ci sei il 29 luglio a vedere Spiderman al cinema io e te?</h1>
 
-      <div id="buttons">
-        <button id="btn-si" onclick="rispostaSi()">Sì 😇</button>
-        <button id="btn-no" onclick="scappaNo()">No 🙅‍♀️</button>
-      </div>
+        <div id="buttons">
+          <button id="btn-si" onclick="rispostaSi()">Sì</button>
+          <button id="btn-no" onclick="scappaNo()">No</button>
+        </div>
 
-      <div id="messaggio">
-        <span class="confetti-strip">🕸️🕷️🕸️</span>
-        <span class="msg-emoji">🕷️</span>
-        <p class="msg-text">Perfetto, sapevo avresti detto di si,<br>ti aspetto :)</p>
-        <span class="confetti-strip">🕸️🕷️🕸️</span>
+        <div id="messaggio">
+          <p class="msg-text">Perfetto, sapevo avresti detto di si,<br>ti aspetto <3</p>
+          <img src="spgif.gif" id="spgif">
+          <p class="msg-sub">(scherzo, ero annoiato, buona visione per il film :P)</p>
+        </div>
       </div>
     </div>
   </div>
@@ -36,7 +48,7 @@
     let floatingNo = null;
     let escaped = false;
 
-    // Genera cuori galleggianti di sfondo
+    // Genera spidey galleggianti di sfondo
     const heartsContainer = document.getElementById('hearts');
     const spideyImgs = ['spidey1.png', 'spidey2.png', 'spidey3.png'];
     for (let i = 0; i < 12; i++) {
@@ -51,13 +63,28 @@
       heartsContainer.appendChild(h);
     }
 
+    function apriLettera() {
+      const env = document.getElementById('envelope');
+      const wrap = document.getElementById('envelope-wrap');
+      env.classList.add('open');
+
+      // Dopo l'animazione apertura, nascondi busta e mostra card
+      setTimeout(() => {
+        wrap.classList.add('fade-out');
+        setTimeout(() => {
+          wrap.style.display = 'none';
+          arena.classList.remove('hidden');
+          arena.classList.add('fade-in');
+        }, 400);
+      }, 800);
+    }
+
     function scappaNo() {
       if (!escaped) {
         const original  = document.getElementById('btn-no');
         const btnRect   = original.getBoundingClientRect();
         const arenaRect = arena.getBoundingClientRect();
 
-        // Crea un clone nell'arena, la card non viene toccata
         floatingNo = original.cloneNode(true);
         floatingNo.id = 'btn-no-floating';
         floatingNo.style.position = 'absolute';
@@ -66,7 +93,6 @@
         floatingNo.addEventListener('click', scappaNo);
         arena.appendChild(floatingNo);
 
-        // Nasconde l'originale senza modificare il layout
         original.style.visibility = 'hidden';
         escaped = true;
       }
@@ -81,10 +107,20 @@
     }
 
     function rispostaSi() {
+      const h1 = document.querySelector('h1');
+      const img = document.querySelector('.emoji-top');
       document.getElementById('buttons').style.visibility = 'hidden';
       if (floatingNo) floatingNo.style.visibility = 'hidden';
       document.getElementById('btn-no').style.visibility = 'hidden';
-      document.getElementById('messaggio').classList.add('visible');
+
+      // Anima domanda e immagine verso l'alto
+      h1.classList.add('fly-up');
+      img.classList.add('fly-up');
+
+      // Mostra messaggio dopo l'animazione
+      setTimeout(() => {
+        document.getElementById('messaggio').classList.add('visible');
+      }, 600);
     }
   </script>
 
