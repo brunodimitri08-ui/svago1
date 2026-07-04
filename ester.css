@@ -205,40 +205,64 @@ body {
 
 /* Mobile (iPhone e schermi piccoli) */
 @media (max-width: 600px) {
-  #arena {
-    padding: 70px;
+  #envelope {
+    width: 200px;
+    height: 136px;
   }
 
-  .card {
-    padding: 2rem 1.8rem;
-    border-radius: 24px;
-    width: 85vw;
+  #envelope-wrap {
+    gap: 1.4rem;
   }
 
-  .emoji-top {
-    font-size: 2.6rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  button {
-    padding: 0.75rem 1.8rem;
+  #btn-apri {
+    padding: 0.7rem 2rem;
     font-size: 1rem;
   }
 
+  #arena {
+    padding: 50px;
+  }
+
+  .card {
+    width: 92vw;
+    min-height: 92vw;
+  }
+
+  .card-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .emoji-top {
+    width: 65px;
+  }
+
+  h1 {
+    font-size: 1.35rem;
+    margin-bottom: 1.2rem;
+    -webkit-text-stroke: 2px #000;
+  }
+
+  button {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  #buttons {
+    gap: 0.8rem;
+  }
+
   .msg-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    -webkit-text-stroke: 2px #000;
   }
 
-  .msg-emoji {
-    font-size: 2.2rem;
+  .msg-sub {
+    font-size: 0.95rem;
+    -webkit-text-stroke: 1.5px #000;
   }
 
-  .confetti-strip {
-    font-size: 1.4rem;
+  #spgif {
+    width: 130px;
   }
 }
 @keyframes cardIn {
