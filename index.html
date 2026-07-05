@@ -22,7 +22,7 @@
   </div>
 
   <!-- Card con domanda (nascosta inizialmente) -->
-  <div id="arena" class="hidden">
+  <div id="arena" class="hidden" style="display:none">
     <div class="card">
       <!-- Contenuto -->
       <div class="card-content">
@@ -74,6 +74,7 @@
         setTimeout(() => {
           wrap.style.display = 'none';
           arena.classList.remove('hidden');
+          arena.style.display = '';
           arena.classList.add('fade-in');
         }, 400);
       }, 800);
