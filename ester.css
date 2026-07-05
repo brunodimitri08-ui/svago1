@@ -228,17 +228,11 @@ body {
 
   #arena {
     padding: 35px 25px !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
   }
 
   .card {
     width: 90vw !important;
     min-height: unset !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
   }
 
   .card-content {
@@ -277,13 +271,10 @@ body {
   }
 
   #messaggio {
-    position: relative !important;
-    inset: unset !important;
     justify-content: center !important;
     align-items: center !important;
     padding-bottom: 0 !important;
     gap: 0.6rem !important;
-    margin-top: 0.5rem !important;
   }
 
   .msg-text {
