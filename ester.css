@@ -135,7 +135,7 @@ body {
 #btn-apri:active { transform: scale(0.97); }
 
 /* Card nascosta / visibile */
-#arena.hidden { display: none; }
+#arena.hidden { display: none !important; }
 #arena.fade-in { animation: fadeIn 0.5s ease both; }
 
 @keyframes fadeOut {
