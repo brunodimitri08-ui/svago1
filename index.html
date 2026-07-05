@@ -117,10 +117,8 @@
       h1.classList.add('fly-up');
       img.classList.add('fly-up');
 
-      // Dopo l'animazione nasconde h1/img e mostra messaggio
+      // Mostra messaggio dopo l'animazione
       setTimeout(() => {
-        h1.style.visibility = 'hidden';
-        img.style.visibility = 'hidden';
         document.getElementById('messaggio').classList.add('visible');
       }, 600);
     }
